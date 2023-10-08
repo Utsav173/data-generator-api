@@ -85,7 +85,7 @@ module.exports = {
         },
       };
 
-      const transporter = nodemailer.createTransport(trapmail);
+      const transporter = nodemailer.createTransport(google);
       const mailOptions = {
         from: 'data-gen-x@gmail.com',
         to: email,
