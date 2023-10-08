@@ -28,11 +28,6 @@ export default function GenerateData() {
   const [supportType, setSupportType] = useState(null);
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log({
-      apiKey,
-      structure: JSON.parse(structure),
-      arrayLength,
-    });
     let config = {
       method: "post",
       maxBodyLength: Infinity,
@@ -111,7 +106,6 @@ export default function GenerateData() {
             theme="solarized_light"
             name="blah2"
             onChange={(e) => {
-              console.log(e);
               setStructure(e);
             }}
             fontSize={14}

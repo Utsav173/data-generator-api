@@ -37,7 +37,6 @@ const Profile = () => {
       const response = await axios.request(config);
       setProfileData(response.data);
     } catch (error) {
-      console.log(error);
       setError(error.response?.data?.message);
     }
   };
