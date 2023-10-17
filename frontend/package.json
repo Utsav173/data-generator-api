@@ -19,11 +19,15 @@
     "ace-builds": "^1.28.0",
     "axios": "^1.5.0",
     "brace": "^0.11.1",
+    "jspdf": "^2.5.1",
+    "jspdf-autotable": "^3.7.0",
+    "papaparse": "^5.4.1",
     "react": "^18.2.0",
     "react-ace": "^10.1.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.16.0",
-    "styled-components": "^5.3.11"
+    "styled-components": "^5.3.11",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@types/react": "^18.0.28",
