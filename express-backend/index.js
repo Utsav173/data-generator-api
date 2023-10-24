@@ -51,7 +51,7 @@ cron.schedule("0 0 1 * *", async () => {
 // Define the second job
 cron.schedule("*/13 * * * *", async () => {
   try {
-    const response = await axios.get("/v1/test");
+    const response = await axios.get("https://data-x-2.onrender.com/v1/test");
 
     console.log(response.data);
   } catch (error) {
