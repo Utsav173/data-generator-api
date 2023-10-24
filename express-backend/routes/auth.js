@@ -150,7 +150,7 @@ router.post("/forgot-api-key", async (req, res) => {
 });
 
 // Route: /auth/me
-router.get("/me", [hasApiKey], async (req, res) => {
+router.get("/me", hasApiKey, async (req, res) => {
   try {
     const userData = await User.findOne({
       where: {

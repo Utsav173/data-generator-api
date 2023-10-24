@@ -1,14 +1,13 @@
 const express = require("express");
 const router = express.Router();
 const { generateRandomDataForStructure } = require("../utils/index");
-const { ObjectId } = require("mongodb");
 const GeneratedData = require("../models/GeneratedData"); // Assuming you have a GeneratedData model
 const { hasApiKey } = require("../middlewares");
 const User = require("../models/User");
 // Route: /randomData/generateRandomData
-router.post("/api/generate/data", [hasApiKey], async (req, res) => {
+router.post("/api/generate/data", hasApiKey, async (req, res) => {
   const { structure, arrayLength } = req.body;
-  console.log("this called");
+
   if (!structure || !arrayLength) {
     return res
       .status(400)
@@ -37,7 +36,7 @@ router.post("/api/generate/data", [hasApiKey], async (req, res) => {
 });
 
 // Route: /randomData/getSupportedTypes
-router.get("/user/supportedTypes", [hasApiKey], async (req, res) => {
+router.get("/user/supportedTypes", hasApiKey, async (req, res) => {
   try {
     const types = [
       "string",
@@ -63,6 +62,23 @@ router.get("/user/supportedTypes", [hasApiKey], async (req, res) => {
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: error.message });
+  }
+});
+
+router.get("/v1/test", (req, res) => {
+  try {
+    const impurl = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false`;
+    return res.json({
+      message: "success",
+      data: {
+        coreImportance: {
+          coreImportance: "coreImportance",
+          coreImportance: impurl,
+        },
+      },
+    });
+  } catch (error) {
+    return;
   }
 });
 

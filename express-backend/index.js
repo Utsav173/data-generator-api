@@ -26,6 +26,7 @@ db.on("error", console.error.bind(console, "MongoDB connection error:"));
 const adminRoutes = require("./routes/admin"); // Replace with your actual routes path
 const authRoutes = require("./routes/auth");
 const randomDataRoutes = require("./routes/randomData");
+const { default: axios } = require("axios");
 
 // Use your routes
 app.use("/admin", adminRoutes);
@@ -48,10 +49,14 @@ cron.schedule("0 0 1 * *", async () => {
 });
 
 // Define the second job
-cron.schedule("*/13 * * * *", () => {
-  const dateTime = new Date().toLocaleTimeString();
-  const dateDay = new Date().toLocaleDateString();
-  console.log(`Date: ${dateDay} Time: ${dateTime}`);
+cron.schedule("*/13 * * * *", async () => {
+  try {
+    const response = await axios.get("/v1/test");
+
+    console.log(response.data);
+  } catch (error) {
+    console.error("Error running second job:", error);
+  }
 });
 
 // Start server
