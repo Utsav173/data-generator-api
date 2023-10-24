@@ -1,4 +1,4 @@
-const API_ENDPOINT = 'https://data-x-gen-api.onrender.com';
+const API_ENDPOINT = 'https://data-x-2.onrender.com';
 // const API_ENDPOINT = 'http://localhost:1337';
 export const API = {
   GET_API_KEY: `${API_ENDPOINT}/user/api-key`,
