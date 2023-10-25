@@ -4,13 +4,7 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import axios from "axios";
-import {
-  Alert,
-  Breadcrumbs,
-  Link,
-  MenuItem,
-  TextField,
-} from "@mui/material";
+import { Alert, Breadcrumbs, Link, MenuItem, Stack, TextField } from "@mui/material";
 import { Link as HrefLink } from "react-router-dom";
 import { API } from "../api";
 import AceEditor from "react-ace";
@@ -25,6 +19,7 @@ import "ace-builds/src-noconflict/theme-tomorrow";
 import "ace-builds/src-noconflict/ext-beautify";
 import "ace-builds/src-noconflict/ext-inline_autocomplete";
 import "ace-builds/src-noconflict/ext-code_lens";
+import Sidebar from "../components/Sidebar";
 
 export default function GenerateData() {
   const [apiKey, setApiKey] = useState(
@@ -35,7 +30,6 @@ export default function GenerateData() {
   const [success, setSuccess] = useState(false);
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
-  const [supportType, setSupportType] = useState(null);
   const [downloadFormat, setDownloadFormat] = useState("");
 
   const flattenObject = (obj, prefix = "") => {
@@ -153,13 +147,6 @@ export default function GenerateData() {
       setSuccess(true);
     } catch (error) {
       setError(error.response?.data?.message);
-      const typesResponse = await axios.get(API.GET_TYPES, {
-        headers: {
-          "Content-Type": "application/json",
-          "api-key": apiKey,
-        },
-      });
-      setSupportType(typesResponse.data);
       console.error("Error sending request:", error);
     }
   };
@@ -187,9 +174,12 @@ export default function GenerateData() {
         <Typography color="text.primary">Generate Data</Typography>
       </Breadcrumbs>
       <Box sx={{ my: 2 }}>
-        <Typography variant="h4" component="h1" gutterBottom>
-          Generate Data
-        </Typography>
+        <Stack direction="row" my={2} spacing={3} alignItems={"center"}>
+          <Typography variant="h4" component="h1" mb={0} gutterBottom>
+            Generate Data
+          </Typography>
+          <Sidebar />
+        </Stack>
 
         <form onSubmit={handleSubmit}>
           {error && (
@@ -200,12 +190,6 @@ export default function GenerateData() {
               }}
             >
               {error}
-            </Alert>
-          )}
-          {supportType && (
-            <Alert severity="info" sx={{ my: 2 }}>
-              Currently only following types are supported{" "}
-              {supportType.join(", ")}
             </Alert>
           )}
           <TextField

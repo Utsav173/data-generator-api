@@ -10,6 +10,7 @@ import GenerateData from './pages/GenerateData';
 import Profile from './pages/Profile';
 const rootElement = document.getElementById('root');
 const root = createRoot(rootElement);
+import { SnackbarProvider } from 'notistack';
 const router = createBrowserRouter([
   {
     path: '/',
@@ -41,6 +42,9 @@ const router = createBrowserRouter([
 ]);
 root.render(
   <React.StrictMode>
+      <SnackbarProvider maxSnack={3}>
+
     <RouterProvider router={router} />
+    </SnackbarProvider>
   </React.StrictMode>
 );
